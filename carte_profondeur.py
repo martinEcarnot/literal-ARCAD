@@ -84,6 +84,7 @@ def workflow_carte_profondeur(image1, image2):
 
     return z_image
 
+<<<<<<< HEAD
 def plot_histo_ht(depth_image, plot_path):
     #height_map_clean = np.where(np.isfinite(depth_image), depth_image, 5000)
     #height_map_clipped = np.clip(height_map_clean, a_min=None, a_max=6000)
@@ -97,3 +98,5 @@ def plot_histo_ht(depth_image, plot_path):
     # Sauvegarder l'image
     plt.savefig(plot_path + "/histogramme_hauteurs.png", dpi=300)
 
+=======
+>>>>>>> origin/master
