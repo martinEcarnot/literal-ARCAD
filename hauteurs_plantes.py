@@ -18,13 +18,9 @@ def filtre_points_aberrants(matrice):
 
         # Définir des bornes pour filtrer les points aberrants
         ecart_type = np.nanstd(matrice_filtree)
-<<<<<<< HEAD
         limite_inf = moyenne_actuelle - 3 * ecart_type
         limite_sup = moyenne_actuelle + 2.5 * ecart_type
-=======
-        limite_inf = moyenne_actuelle - 5 * ecart_type
-        limite_sup = moyenne_actuelle + 4 * ecart_type
->>>>>>> origin/master
+
 
         # Remplacer les points aberrants par NaN
         nouvelle_matrice_filtree = matrice_filtree.copy()
@@ -45,7 +41,6 @@ def filtre_points_aberrants(matrice):
 
     return matrice_filtree
 
-<<<<<<< HEAD
 def sol_par_zone(sol_locaux):
 
     sol_locaux=-sol_locaux
@@ -66,11 +61,8 @@ def sol_par_zone(sol_locaux):
                     ax.text(j , i , f"{int(hsol):3d}", color='white', ha='center', va='center', fontsize=7)
     return figure_sol
 
-def carte_hauteur_absolue(matrice, nombre_zones, ):
-=======
 
 def carte_hauteur_absolue(matrice, nombre_zones):
->>>>>>> origin/master
     """Calcule la carte des hauteurs en ajustant le sol à zéro."""
 
     # Taille des zones
@@ -81,25 +73,17 @@ def carte_hauteur_absolue(matrice, nombre_zones):
     mat_sans_nan = matrice[~np.isnan(matrice)]
     sol_bac = - np.median(np.sort(mat_sans_nan.flatten())[::-1][:int(mat_sans_nan.size * 0.03)])
     mat_hauteur = -1 * matrice.copy()
-<<<<<<< HEAD
     sol_locaux = np.zeros((len(range(0, matrice.shape[0], zone_size[0])), len(range(0, matrice.shape[1], zone_size[1]))))
     isl=0
 
     for i in range(0, matrice.shape[0], zone_size[0]):  # Parcourir chaque zone
         jsl = 0
-=======
-    sol_locaux = []
-
-    for i in range(0, matrice.shape[0], zone_size[0]):  # Parcourir chaque zone
->>>>>>> origin/master
         for j in range(0, matrice.shape[1], zone_size[1]):
             # Extraire la zone actuelle
             zone = mat_hauteur[i:i + zone_size[0], j:j + zone_size[1]]
 
             # Calculer le sol local pour la zone
             zone_sans_nan = zone[~np.isnan(zone)]
-<<<<<<< HEAD
-
             if zone_sans_nan.size > 0:
                 sol_local = np.median(np.sort(zone_sans_nan.flatten())[:int(zone_sans_nan.size * 0.03)])
             else:
@@ -121,18 +105,7 @@ def carte_hauteur_absolue(matrice, nombre_zones):
 
         isl=isl+1
     return mat_hauteur, sol_bac, sol_locaux
-=======
-            sol_local = np.median(np.sort(zone_sans_nan.flatten())[:int(zone_sans_nan.size * 0.03)])
-            sol_locaux.append(sol_local)
 
-            # Ramener le sol à zero
-            if sol_bac - 100 <= sol_local <= sol_bac + 50:
-                zone -= sol_local
-            else:
-                zone -= sol_bac
-
-    return mat_hauteur, sol_bac
->>>>>>> origin/master
 
 
 def hauteur_par_zone(matrice_h, nombre_zones):
@@ -152,10 +125,6 @@ def hauteur_par_zone(matrice_h, nombre_zones):
         for j in range(0, matrice_h.shape[1], zone_size[1]):
             # Extraire la zone actuelle
             zone = matrice_h[i:i + zone_size[0], j:j + zone_size[1]]
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
             zone_sans_nan = zone[~np.isnan(zone)]
             if zone.shape[0]*zone.shape[1] <= 0.5 * zone_size[0]*zone_size[1]:
                 hauteurs.append(np.inf)
@@ -164,16 +133,12 @@ def hauteur_par_zone(matrice_h, nombre_zones):
                 # Calculer la hauteur locale pour la zone
                 max_local = np.median(np.sort(zone_sans_nan.flatten())[::-1][:int(zone_sans_nan.size * 0.03)])
                 max_locals.append(max_local)
-<<<<<<< HEAD
 
                 plt.figure(figsize=(8, 5))
                 plt.hist(zone.flatten(), bins=50, color='lightblue', edgecolor='black', label='Données')
                 plt.axvline(max_local, color='red', linestyle='--', linewidth=2, label=f'x = {max_local:.1f}')
                 plt.legend(title=f"i={i}, j={j}")
 
-
-=======
->>>>>>> origin/master
                 if max_local > max_glob/5:
                     # Ajouter le résultat à la liste
                     hauteurs.append(max_local)
@@ -212,7 +177,3 @@ def hauteur_par_zone(matrice_h, nombre_zones):
     ax.set_title(f'Hauteurs maximale du couvert par zone ({nombre_zones})')
 
     return hauteurs, mat_zones_hauteur, figure_hauteurs
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
