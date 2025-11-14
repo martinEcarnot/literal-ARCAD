@@ -20,11 +20,7 @@ def bord_bac(image, seuil):
     height, width = image.shape[:2]  # Dimensions de l'image
 
     # Masque des pixels verts
-<<<<<<< HEAD
     hsv_img = cv. cvtColor(image, cv.COLOR_BGR2HSV)
-=======
-    hsv_img = cv.cvtColor(image, cv.COLOR_BGR2HSV)
->>>>>>> origin/master
     lower_green = np.array([10, 20, 20])  # Valeurs min de teinte, saturation et valeur pour la couleur verte
     upper_green = np.array([100, 255, 255])  # Valeurs max de teinte, saturation et valeur pour la couleur verte
     mask_green = cv.inRange(hsv_img, lower_green, upper_green)
@@ -47,7 +43,7 @@ def bord_bac(image, seuil):
     image_filtree3 = image_filtree2.copy()
     for i in (range(len(coordinates))):
         if 1200 <= coordinates[i][0] <= 2100 and 1800 <= coordinates[i][1] <= 2900:  # Vérifier si l'objet est dans la zone centrale de l'image
-<<<<<<< HEAD
+
             #for j in range(i + 1, len(coordinates)):
                 # if (abs(coordinates[i][0] - coordinates[j][0]) <= 300) and (
                 #         abs(coordinates[i][1] - coordinates[j][1]) <= 300):
@@ -62,19 +58,7 @@ def bord_bac(image, seuil):
 
             # Test ME may 2025
             image_filtree3[labels == i+1] = 0
-=======
-            for j in range(i + 1, len(coordinates)):
-                if (abs(coordinates[i][0] - coordinates[j][0]) <= 300) and (
-                        abs(coordinates[i][1] - coordinates[j][1]) <= 300):
-                    if 2000 * 255 <= sizes[i] + sizes[j] <= 200000 * 255:  # Vérifier si les objets font la taille du capteur
-                        # Suprimer les objets et leur environs
-                        image_filtree3[labels == i + 1] = 0
-                        image_filtree3[labels == j + 1] = 0
-                        image_filtree3[int(coordinates[i][0] - 300): int(coordinates[i][0] + 300), int(coordinates[i][1] - 300): int(coordinates[i][1] + 300)] = 0
-                        image_filtree3[int(coordinates[j][0] - 300): int(coordinates[j][0] + 300), int(coordinates[j][1] - 300): int(coordinates[j][1] + 300)] = 0
-                elif 2000 * 255 <= sizes[i] <= 200000 * 255:  # # Vérifier si l'objets fait la taille du capteur
-                    image_filtree3[labels == i + 1] = 0
->>>>>>> origin/master
+
 
     # Tracer des lignes entre les objets ayant les mêmes coordonnées horizontales
     image_with_lines = image_filtree3.copy()
@@ -108,11 +92,7 @@ def bord_bac(image, seuil):
     nouvelle_longueur_droite = centre_colonne
 
     # Recherche des bords du bac
-<<<<<<< HEAD
     #image_with_lines = image_with_lines + image_filtree2
-=======
-    image_with_lines = image_with_lines + image_filtree2
->>>>>>> origin/master
     while (nouvelle_longueur <= longueur_min) or (nouvelle_largeur <= largueur_min):  # Ne s'arrete que quand les bords trouvés dépassent les dimensions minimales
         if nouvelle_longueur <= longueur_min:
             ligne = centre_ligne

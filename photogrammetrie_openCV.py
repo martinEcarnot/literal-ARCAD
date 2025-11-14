@@ -11,15 +11,10 @@ import cv2 as cv
 import csv
 from itertools import zip_longest
 from tqdm import tqdm
-<<<<<<< HEAD
 import matplotlib
 from matplotlib import pyplot as plt
 matplotlib.use('TkAgg')
-#os.chdir("C:\\Users\\HySpex_user\\PycharmProjects\\Photogrammetrie_openCV_Mobidiv-master\\Photogrammetrie_openCV_Mobidiv-master")
-=======
 from matplotlib import pyplot as plt
-
->>>>>>> origin/master
 
 def sauvegarder_image(image, path_dossier, nom_fichier):
     """Enregistre une image ou une figure dans un dossier."""
@@ -29,16 +24,10 @@ def sauvegarder_image(image, path_dossier, nom_fichier):
 
         fig.set_dpi(800)  # Résolution de l'image
         fig.canvas.draw()
-<<<<<<< HEAD
         # tostring_rgb() depeciated
         #img_np = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
         #img_np = img_np.reshape(fig.canvas.get_width_height()[::-1] + (3,))
         img_np = np.asarray(fig.canvas.renderer.buffer_rgba())[:, :, :3]
-
-=======
-        img_np = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
-        img_np = img_np.reshape(fig.canvas.get_width_height()[::-1] + (3,))
->>>>>>> origin/master
         return cv.cvtColor(img_np, cv.COLOR_RGB2BGR)
 
     # Vérifier si le dossier existe, sinon le créer
@@ -100,26 +89,17 @@ def traiter_dossier_plot(plot_path, session_name):
 
             # Filtre des points aberrants
             mat_filtree = hauteurs_plantes.filtre_points_aberrants(image_cut)
-<<<<<<< HEAD
             carte_profondeur.plot_histo_ht(mat_filtree, plot_path)
 
             # Calcul des hauteurs locales
             carte_hauteur, profondeur_sol, sol_locaux = hauteurs_plantes.carte_hauteur_absolue(mat_filtree, n_zones)  # Carte de hauteur relative au sol
-=======
-
-            # Calcul des hauteurs locales
-            carte_hauteur, profondeur_sol = hauteurs_plantes.carte_hauteur_absolue(mat_filtree, n_zones)  # Carte de hauteur relative au sol
->>>>>>> origin/master
             liste_hauteurs, grille_h, figure_h = hauteurs_plantes.hauteur_par_zone(carte_hauteur, n_zones)
             print(liste_hauteurs)
 
             # Enregistrement des fichiers
             sauvegarder_image(image_left_bac, plot_path, file.replace('RGB', 'bac'))  # Contours du bac détectés sur l'image de gauche
             sauvegarder_image(image_left_bac, plot_path, file.replace('camera_1', 'camera_2').replace('RGB', 'bac'))  # Contours du bac détectés sur l'image de droite
-<<<<<<< HEAD
             sauvegarder_image(hauteurs_plantes.sol_par_zone(sol_locaux), plot_path, f"grille_sol_{os.path.basename(os.path.normpath(plot_path))}_{n_zones}z.jpg")  # Représentation graphique des hauteurs locales de sol
-=======
->>>>>>> origin/master
             sauvegarder_image(figure_h, plot_path, f"grille_hauteur_{os.path.basename(os.path.normpath(plot_path))}_{n_zones}z.jpg")  # Représentation graphique des hauteurs locales dans le bac
 
             # Export de la liste des hauteurs en csv
